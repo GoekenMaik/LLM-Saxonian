@@ -63,6 +63,6 @@ def modify_dataset(input_file, output_file):
 
 # Example usage
 if __name__ == "__main__":
-    input_file = "translate_nds_en_clean1.json"
-    output_file = "EnToNDS_clean.json"
+    input_file = "new_translate_nds_en_clean1.json"
+    output_file = "ENToNDS_clean_new.json"
     modify_dataset(input_file, output_file)

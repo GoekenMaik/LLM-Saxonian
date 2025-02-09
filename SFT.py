@@ -16,7 +16,7 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:256"
 
 # Define the Llama 3.2 Instruct prompt template
-LLAMA_3_2_TEMPLATE = "<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n{instruction}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n{response}<|eot_id|><|file_separator|>"
+LLAMA_3_2_TEMPLATE = "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nDu büst en höchst fähigen Hülper. Du schüllst in plattdüütsch antwoorten.<|eot_id|><|start_header_id|>user<|end_header_id|>\n{instruction}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n{response}<|eot_id|><|file_separator|>"
 
 def prepare_data_for_sft(instruction_column, response_column, tokenizer, template, max_length=2048):
     """Tokenize and prepare text data for Supervised Fine-Tuning (SFT) using a template."""

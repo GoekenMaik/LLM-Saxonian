@@ -109,8 +109,8 @@ def clean_translations(
 
 # Example usage
 if __name__ == "__main__":
-    input_file = "translate_nds_de.json"
-    output_file = "translate_nds_de_clean1.json"
+    input_file = "new_translate_nds_en.json"
+    output_file = "new_translate_nds_en_clean1.json"
 
     # Define strings to exclude
     excluded_strings = {
