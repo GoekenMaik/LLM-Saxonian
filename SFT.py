@@ -50,7 +50,6 @@ def main():
     # Configure parameters
     #model_name = "meta-llama/Llama-3.2-8B-Instruct" # Using 8B Instruct as 3B Instruct might not be available, adjust if needed.
     output_dir = "./llama3.2-3B-Instruct-multi-dataset-sft/" # Adjusted output directory
-    dataset_path = "combinedDatasets.json" # Path to your SFT dataset on disk.  Assume it's saved as "sft_dataset" using datasets.save_to_disk()
 
     # Download and cache the model locally (optional, if you want to use a local copy)
     # local_model_path = "./llama3.2-8B-Instruct/" ## model path # You can download and save the model manually and use this path

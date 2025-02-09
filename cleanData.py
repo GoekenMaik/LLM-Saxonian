@@ -54,7 +54,8 @@ def clean_translations(
     # Ensure data is a list
     if isinstance(data, dict):
         data = [data]
-    
+    max_length_total = 0
+
     # Process each entry
     for entry in data:
         try:
@@ -65,9 +66,17 @@ def clean_translations(
             
             # Check for excluded strings
             translation = entry['translation']
+            text = entry['text']
             if any(excl_str in translation for excl_str in excluded_strings):
                 skipped_entries["excluded_string"] += 1
                 continue
+
+            if any(excl_str in text for excl_str in excluded_strings):
+                skipped_entries["excluded_string"] += 1
+                continue
+
+
+
             
             text_length = len(entry['text'].split())
             translation_length = len(entry['translation'].split())
@@ -75,10 +84,11 @@ def clean_translations(
             # Calculate length ratio
             max_length = max(text_length, translation_length)
             min_length = min(text_length, translation_length)
+            max_length_total = max(max_length, max_length_total)
             length_ratio = min_length / max_length if max_length > 0 else 0
             
             # Keep entry if length ratio is above threshold
-            if length_ratio >= (1 - length_ratio_threshold):
+            if (length_ratio >= (1 - length_ratio_threshold)) and max_length < 5000:
                 cleaned_data.append(entry)
             else:
                 skipped_entries["length_mismatch"] += 1
@@ -105,6 +115,7 @@ def clean_translations(
     print(f"- Contained excluded strings: {skipped_entries['excluded_string']}")
     print(f"- Invalid entries: {skipped_entries['invalid_entry']}")
     print(f"\nOutput saved to: {output_file}")
+    print(max_length_total)
 
 
 # Example usage
@@ -132,7 +143,15 @@ if __name__ == "__main__":
         "English translation",
         "a translation focusing",
         "Übersetzung",
-        "the translation, aiming"
+        "the translation, aiming",
+        "ISBN",
+        "Footnoten",
+        "Diskografie",
+        "Literatur",
+        "Verlag",
+        "http",
+        "www",
+        "Enkeld Nahwiesen"
     }
     
     clean_translations(input_file, output_file,excluded_strings, length_ratio_threshold=0.3)
