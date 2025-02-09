@@ -37,7 +37,7 @@ def create_dataset_from_json(json_path, output_dir):
 if __name__ == "__main__":
     # Replace these paths with your actual paths
     json_path = "combinedDatasets.json"
-    output_dir = "./combinedDatasetHuggingfaceFormatOnlyTranslations"
+    output_dir = "./combinedDatasetHuggingfaceFormat"
     
     dataset = create_dataset_from_json(json_path, output_dir)
     
